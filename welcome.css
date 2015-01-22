@@ -1,8 +1,21 @@
 
 img.logo {
 	float: left;
+	position: relative;
+    top: 100px;
+	padding-right: 10px;
 }
 
-#sign-up {
-  float: left;
+form {
+	position: relative;
+    top: 100px;
+	padding-bottom: 10px;
+}
+
+p { 
+   font-weight: bold;
+}
+
+body {
+    background-color: #b0c4de;
 }
