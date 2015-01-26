@@ -1,0 +1,59 @@
+.wrapper {
+	width: 600px;
+	float: left;
+    position: relative;
+    left: 50%;
+}
+
+.elements {
+    margin-left: -50%;
+}
+
+img.logo {
+	position: relative;
+	float: left;
+	clear: left;
+    top: 100px;
+	margin-right: 10px;
+	border: 1px solid black;
+}
+
+form {
+	display: table;
+	position: relative;
+	width: 250px;
+	background-color: #fff;	
+	border: 1px solid black;
+	padding: 2px;
+}
+
+#sign-in {
+	top: 100px;
+}
+
+#sign-up {
+	top: 110px;
+
+}
+
+label{
+	display: inline-block;  
+	text-align: left; 
+	margin-bottom: 8px
+}
+
+input, select {
+	width: 50%;
+	float: right;
+	clear: right;
+}
+
+#desc { 
+   text-align: center;
+   font-size: 120%;
+   font-weight: bold;
+}
+
+body {
+    background-color: #b0c4de;
+}
