@@ -7,7 +7,6 @@ displayView = function(view) {
 };
 
 window.onload = function() {
-	//window.alert("Hello TDDD97");
 	displayView(current_view);
 	document.getElementById("sign-in").onsubmit = function() 
 	{	
@@ -15,12 +14,10 @@ window.onload = function() {
 		{
 			current_view = "profileview";
 			displayView(current_view);
-			return true;
 
 		}
 
-		else
-			return false;
+		return false;
 
 	};
 
@@ -40,12 +37,10 @@ window.onload = function() {
 			};
 
 			var response = serverstub.signUp(data_object);
-			alert(response);
-			return true;
+			alert(response.message);
 		}
-
-		else
-			return false;
+	
+		return false;
 
 	};
 };
@@ -57,15 +52,15 @@ validateSignUp = function() {
  		return true;
  	else
  	{
- 		alert("Password fields do not match!");
+ 		document.getElementById("password2").focus();
  		return false;
-};
- 	}
+	}
+ };
 
 
 validateSignIn = function() {
-	//concole.log("Sign in validated");
-	//alert("Sign in validated");
 
 	return document.getElementById("password1").value.length >= min_passw_length;
 };
+
+
