@@ -1,5 +1,6 @@
 var current_view = "welcomeview";
 var min_passw_length = 5;
+var token;
 
 displayView = function(view) 
 {
@@ -13,26 +14,44 @@ signIn = function()
    displayView(current_view);
 };
 
-window.onload = function()
+SignOut = function()
 {
-   displayView(current_view);
+   localStorage.setItem( "token", -1 );
+   current_view = "welcomeview";
+   displayView( current_view );
+};
 
+init_welcome_functions = function()
+{
 
    //SIGN-IN
    document.getElementById("sign-in").onsubmit = function() 
-   {	
-      signIn();
+   {
+      var data_object = 
+      {
+         email: document.getElementById("email1").value,
+         password: document.getElementById("password1").value
+      };
 
+      var response = serverstub.signIn( data_object );
+      var input = document.getElementById('email1');
+      //var input = document.getElementById('password1');
+     
+
+         if( response.success === false )
+         {
+            console.log(response.message);
+            input.setCustomValidity( response.message ); //TODO  
+         } 
+         else
+         {
+            localStorage.setItem( "token", response.data);
+            input.setCustomValidity("");
+            signIn();
+         }
       return false;
    };
-   /*
-      //TODO SIGN-OUT
-      document.getElementById("logout").onclick
-      {
-         current_view = "welcomeview";
-         displayView( current_view );
-      }
-   */
+   
 
    //SIGN-UP
    document.getElementById("sign-up").onsubmit = function() 
@@ -60,12 +79,45 @@ window.onload = function()
          else
          {
             input.setCustomValidity("");
+            var data_object = 
+            {
+               email: document.getElementById("email2").value,
+               password: document.getElementById("password2").value
+            };
+
+            var response = serverstub.signIn( data_object );
+            localStorage.setItem( "token", response.data);
             signIn();
          }
 
       return false;	
    };
+};//INIT_WELCOME_FUNCTIONS
 
+init_profile_functions = function()
+{
+   document.getElementById("logout").onclick = function()
+   {
+      SignOut();
+   };
+};
+
+//WHEN ONE REFESH
+window.onload = function()
+{
+   console.log( localStorage.getItem( "token" ));
+   if( localStorage.getItem( "token" ) == -1 )
+   {
+      current_view = "welcomeview";
+      displayView(current_view);
+      init_welcome_functions();
+   }
+   else
+   {
+      current_view = "profileview";
+      displayView(current_view);
+      init_profile_functions();
+   }
 };
 
 
@@ -112,6 +164,4 @@ validateSignIn = function()
      psw.setCustomValidity("");
      return true;
    }
-
-
 };
