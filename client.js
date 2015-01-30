@@ -12,14 +12,16 @@ signIn = function()
 {
    current_view = "profileview";
    displayView(current_view);
+   init_profile_functions();
 };
 
 SignOut = function()
 {
-   localStorage.setItem( "token", -1 );
+   localStorage.removeItem( "token" );
    current_view = "welcomeview";
    displayView( current_view );
-};
+   init_welcome_functions();
+}
 
 init_welcome_functions = function()
 {
@@ -33,19 +35,17 @@ init_welcome_functions = function()
          password: document.getElementById("password1").value
       };
 
-      var response = serverstub.signIn( data_object );
+      var response = serverstub.signIn( data_object.email, data_object.password );
       var input = document.getElementById('email1');
-      //var input = document.getElementById('password1');
      
-
          if( response.success === false )
          {
             console.log(response.message);
-            input.setCustomValidity( response.message ); //TODO  
+            input.setCustomValidity( response.message ); 
          } 
          else
          {
-            localStorage.setItem( "token", response.data);
+            localStorage.setItem( "token", response.data );
             input.setCustomValidity("");
             signIn();
          }
@@ -78,15 +78,8 @@ init_welcome_functions = function()
 
          else
          {
+            localStorage.setItem( "token", response.data );
             input.setCustomValidity("");
-            var data_object = 
-            {
-               email: document.getElementById("email2").value,
-               password: document.getElementById("password2").value
-            };
-
-            var response = serverstub.signIn( data_object );
-            localStorage.setItem( "token", response.data);
             signIn();
          }
 
@@ -105,8 +98,8 @@ init_profile_functions = function()
 //WHEN ONE REFESH
 window.onload = function()
 {
-   console.log( localStorage.getItem( "token" ));
-   if( localStorage.getItem( "token" ) == -1 )
+   console.log( localStorage.getItem("token") );
+   if( localStorage.getItem( "token" ) === null || localStorage.getItem( "token" ) ===undefined )
    {
       current_view = "welcomeview";
       displayView(current_view);
@@ -134,18 +127,15 @@ validateSignUp = function()
       psw.setCustomValidity("Too short! It must be at least "+min_passw_length.toString()+" characters");
       return false;
    }
-
    else if(psw.value !== repeat_psw.value)
    {
       repeat_psw.setCustomValidity("Please enter the same password as above");
       return false;
    }
-
    else
    {
      return true;
    }
-
  };
 
 
@@ -158,7 +148,6 @@ validateSignIn = function()
       psw.setCustomValidity("Too short! It must be at least "+min_passw_length.toString()+" characters");
       return false;
    }
-
    else
    {
      psw.setCustomValidity("");
