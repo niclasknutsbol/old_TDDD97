@@ -19,8 +19,9 @@
 				</form>
 
 				<form id = "sign-up" method="post">
-					<p id="desc">Sign up here</p>
-
+					<div class="heading">
+						<p id="desc">Sign up here</p>
+					</div>
 					<label for="firstname">First name: </label>  <input type="text" name="firstname" id="firstname" required> <br />
 
 					<label for="familyname">Family name: </label> <input type="text" name="familyname" id ="familyname" required> <br />
@@ -43,8 +44,24 @@
 		</script>
 
 		<script id="profileview" type="text/view">
-			 <p>Profile View placeholder</p> 
-			 <button id="logout" > Log out </button> 
+			<div class="heading">
+				 <p>Twidder! ...bitch</p>
+			</div>
+			 <ul class="tabs" data-tab>
+			  <li class="tab_title active"><a href="#home_panel">Home</a></li>
+			  <li class="tab_title"><a href="#browse_panel">Browse</a></li>
+			  <li class="tab_title"><a href="#account_panel">Account</a></li>
+			</ul>
+
+			 <div class="panel" id="home_panel">
+			 </div>
+			 <div class="panel" id="browse_panel">
+			 </div>
+			 <div class="panel" id="account_panel">
+			 	<button id="logout" > Log out </button>
+			 </div>
+
+ 
 		</script>
 		
 		<title>Twidder</title>

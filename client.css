@@ -16,6 +16,8 @@ img.logo {
     top: 100px;
 	margin-right: 10px;
 	border: 1px solid black;
+	border-top-left-radius: 0.5em;
+	border-bottom-left-radius: 0.5em;
 }
 
 form {
@@ -24,6 +26,8 @@ form {
 	width: 250px;
 	background-color: #fff;	
 	border: 1px solid black;
+	border-top-right-radius: 0.5em;
+	border-bottom-right-radius: 0.5em;
 	padding: 2px;
 }
 
@@ -48,12 +52,39 @@ input, select {
 	clear: right;
 }
 
-#desc { 
+.heading { 
    text-align: center;
    font-size: 120%;
    font-weight: bold;
 }
 
-body {
-    background-color: #b0c4de;
+ul {
+	width: 30%;
+	margin-left: auto;
+    margin-right: auto;
+	list-style-type: none; 
+}
+
+li {
+	display: block;
+}
+
+a {
+    float: left;
+    width: 6em;
+    color: black;
+    padding: 0.2em 0.6em;
+    text-align: center;
+    text-decoration: none; //do not underline text
+}
+
+a:hover {
+	background-color: #2BC83E;
+	border-radius: 0.4em;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+    background: linear-gradient(white,#2B58C8);
 }

@@ -29,24 +29,21 @@ init_welcome_functions = function()
    //SIGN-IN
    document.getElementById("sign-in").onsubmit = function() 
    {
-      var data_object = 
-      {
-         email: document.getElementById("email1").value,
-         password: document.getElementById("password1").value
-      };
 
-      var response = serverstub.signIn( data_object.email, data_object.password );
-      var input = document.getElementById('email1');
+      var email = document.getElementById("email1").value;
+      var password = document.getElementById("password1").value;
+
+      var response = serverstub.signIn( email, password );
      
          if( response.success === false )
          {
             console.log(response.message);
-            input.setCustomValidity( response.message ); 
+            email.setCustomValidity( response.message ); 
          } 
          else
          {
             localStorage.setItem( "token", response.data );
-            input.setCustomValidity("");
+            email.setCustomValidity("");
             signIn();
          }
       return false;
