@@ -88,3 +88,39 @@ html, body {
 	height: 100%;
     background: linear-gradient(white,#2B58C8);
 }
+
+.account_panel:not(:target)
+{
+   display: none;
+}
+
+.account_panel:target
+{
+   display: block;
+}
+
+
+.home_panel:target
+{
+   display: block;
+}
+
+
+.home_panel:not(:target)
+{
+   display: none;
+}
+
+.browse_panel:target
+{
+   display: block;
+}
+
+.browse_panel:not(:target)
+{
+   display: none;
+}
+
+
+
+

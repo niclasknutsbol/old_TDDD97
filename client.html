@@ -45,7 +45,7 @@
 
 		<script id="profileview" type="text/view">
 			<div class="heading">
-				 <p>Twidder! ...bitch</p>
+				 <p>Twidder!</p>
 			</div>
 			 <ul class="tabs" data-tab>
 			  <li class="tab_title active"><a href="#home_panel">Home</a></li>
@@ -53,15 +53,35 @@
 			  <li class="tab_title"><a href="#account_panel">Account</a></li>
 			</ul>
 
-			 <div class="panel" id="home_panel">
-			 </div>
-			 <div class="panel" id="browse_panel">
-			 </div>
-			 <div class="panel" id="account_panel">
-			 	<button id="logout" > Log out </button>
-			 </div>
+			<div class="panel" id="e_panel">
+				<div class="home_panel" id="home_panel">
+                    <p id="home_panel">Home </p>
+                </div>
 
- 
+                <div class="browse_panel" id="browse_panel">           
+                    <p id="browse_panel">Browse </p>
+                </div>
+
+                           <div class = "account_panel" id="account_panel">
+
+                                <p id="account_desc">...Change password</p>
+
+				                <form id = "change_psw" method="post">
+		                                 <label for="password3">Old password: </label>
+		                                 <input type="password" name="old_password" id="password3" required> <br />
+		                                 
+		                                 <label for="password4">New password: </label>
+		                                 <input type="password" name="old_password" id="password4" required> <br />
+						 
+		                                 <label for="password5">Confirm password: </label>
+		                                 <input type="password" name="confirm_password" id="password5" required> <br />
+			 
+		                                 <input type="submit" value="LogIn" >
+				                </form>
+		 						<button id="logout" > Log out </button>
+                           </div> <!--account_panel -->
+
+                        <p id="default"><!-- by default, show no text --> </p>
 		</script>
 		
 		<title>Twidder</title>

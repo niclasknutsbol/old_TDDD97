@@ -38,12 +38,12 @@ init_welcome_functions = function()
          if( response.success === false )
          {
             console.log(response.message);
-            email.setCustomValidity( response.message ); 
+            email1.setCustomValidity( response.message ); 
          } 
          else
          {
             localStorage.setItem( "token", response.data );
-            email.setCustomValidity("");
+            email1.setCustomValidity(""); //This line is probaly unnessery
             signIn();
          }
       return false;
@@ -90,12 +90,51 @@ init_profile_functions = function()
    {
       SignOut();
    };
+
+
+   document.getElementById("change_psw").onsubmit = function()
+   {
+      console.log("#1");
+
+      var new_password = document.getElementById("password4").value;
+      var ctr_new_password = document.getElementById("password5");
+  
+     if( new_password != ctr_new_password.value )
+      {
+         console.log("#1.1");
+         ctr_new_password.setCustomValidity("Your must write your new password twice!");
+         return false;
+      }
+      else
+      {
+         console.log("#1.2");
+         ctr_new_password.setCustomValidity("");  
+      }
+      console.log("#2");
+      var old_password = document.getElementById("password3").value;
+      var temp_token = localStorage.getItem( "token" ); 
+
+      var response = serverstub.changePassword( temp_token, old_password, new_password );
+      console.log( response.success );
+      if( response.success === false )
+      {
+         old_password.setCustomValidity( "Old password is incorrect" );
+         return false;
+      }
+      else
+      {
+         old_password.setCustomValidity( "" ); 
+      }
+
+      return false;
+   };
+
 };
+
 
 //WHEN ONE REFESH
 window.onload = function()
 {
-   console.log( localStorage.getItem("token") );
    if( localStorage.getItem( "token" ) === null || localStorage.getItem( "token" ) ===undefined )
    {
       current_view = "welcomeview";
@@ -136,9 +175,11 @@ validateSignUp = function()
  };
 
 
-validateSignIn = function() 
+validateSignIn = function( psw ) 
 {
-   var psw = document.getElementById("password1");
+   //http://stackoverflow.com/questions/11151157/jquery-same-function-for-multiple-ids
+
+   //var psw = document.getElementById("password1");
 
    if(psw.value.length < min_passw_length)
    {
@@ -151,3 +192,5 @@ validateSignIn = function()
      return true;
    }
 };
+
+
