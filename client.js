@@ -14,6 +14,29 @@ signIn = function()
    displayView(current_view);
    window.location.href = "#home_panel";
    init_profile_functions();
+      setupProfile();
+};
+
+setupProfile = function()
+{
+   var temp_token = localStorage.getItem( "token" ); 
+   var response = serverstub.getUserDataByToken(token);
+
+   if(response.success === true)
+   {
+      document.getElementById("profile_name").innerHTML = response.data.firstname;
+      document.getElementById("profile_family").innerHTML = response.familyname;
+      document.getElementById("profile_gender").innerHTML = response.gender;
+      document.getElementById("profile_country").innerHTML = response.country;
+      document.getElementById("profile_city").innerHTML = response.city;
+      document.getElementById("profile_email").innerHTML = response.email;
+   }
+
+   else
+   {
+      alert(response.message);
+   }
+
 };
 
 SignOut = function()

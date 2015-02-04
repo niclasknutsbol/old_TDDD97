@@ -46,7 +46,7 @@ label{
 	margin-bottom: 0.3em;
 }
 
-input, select {
+form input, select {
 	width: 50%;
 	float: right;
 	clear: right;
@@ -122,8 +122,12 @@ html, body {
 }
 
 #message_box {
+	display: block;
 	resize: none;
 }
 
+#post_button {
+	width: 3em;
+}
 
 

@@ -57,12 +57,42 @@
 
 			<div class="panel" id="e_panel">
 				<div class="home_panel" id="home_panel">
-                    <p id="home_panel">Home </p>
+                    <p id="home_desc">Home </p>
+                    <form id="user_info">
+					  <table id="userinfo_table" style="width:100%">
+					  <tr>
+					    <td>Firstname</td>
+					    <td id="profile_name"></td>		
+					  </tr>
+					  <tr>
+					    <td>Familyname</td>
+					    <td id="profile_family"></td>		
+					  </tr>
+					  <tr>
+					    <td>Gender</td>
+					    <td id="profile_gender"></td>
+					  </tr>
+					  <tr>
+					    <td>Country</td>
+					    <td id="profile_country"></td>
+					  </tr>
+					   <tr>
+					    <td>City</td>
+					    <td id="profile_city"></td>
+					  </tr>
+					  <tr>
+					    <td>Email</td>
+					  	<td id="profile_email"></td>
+					  </tr>
+					</table>
+                    </form>
+
                     <textarea id = "message_box" rows = "5" cols = "40" max_length="90">Your message here...</textarea>
+                    <input type="submit" id="post_button" value="Post">
                 </div>
 
                 <div class="browse_panel" id="browse_panel">           
-                    <p id="browse_panel">Browse </p>
+                    <p id="browse_desc">Browse </p>
                     
                 </div>
 
