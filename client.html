@@ -44,6 +44,8 @@
 		</script>
 
 		<script id="profileview" type="text/view">
+
+			<base href="#home_panel">
 			<div class="heading">
 				 <p>Twidder!</p>
 			</div>
@@ -56,32 +58,32 @@
 			<div class="panel" id="e_panel">
 				<div class="home_panel" id="home_panel">
                     <p id="home_panel">Home </p>
+                    <textarea id = "message_box" rows = "5" cols = "40" max_length="90">Your message here...</textarea>
                 </div>
 
                 <div class="browse_panel" id="browse_panel">           
                     <p id="browse_panel">Browse </p>
+                    
                 </div>
 
-                           <div class = "account_panel" id="account_panel">
+                <div class = "account_panel" id="account_panel">
 
-                                <p id="account_desc">...Change password</p>
+	                <p id="account_desc">...Change password</p>
 
-				                <form id = "change_psw" method="post">
-		                                 <label for="password3">Old password: </label>
-		                                 <input type="password" name="old_password" id="password3" required> <br />
-		                                 
-		                                 <label for="password4">New password: </label>
-		                                 <input type="password" name="old_password" id="password4" required> <br />
-						 
-		                                 <label for="password5">Confirm password: </label>
-		                                 <input type="password" name="confirm_password" id="password5" required> <br />
-			 
-		                                 <input type="submit" value="LogIn" >
-				                </form>
-		 						<button id="logout" > Log out </button>
-                           </div> <!--account_panel -->
-
-                        <p id="default"><!-- by default, show no text --> </p>
+					<form id = "change_psw" method="post">
+			            <label for="password3">Old password: </label>
+			            <input type="password" name="old_password" id="password3" oninput="validateSignIn(this)" required> <br />
+			                                 
+			            <label for="password4">New password: </label>
+			            <input type="password" name="old_password" id="password4" oninput="validateSignIn(this)" required> <br />
+							 
+			            <label for="password5">Confirm PSW: </label>
+			            <input type="password" name="confirm_password" id="password5" oninput="validateSignIn(this)" required> <br />
+				 
+			            <input type="submit" value="Apply" >
+				    </form>
+			 		<button id="logout" > Log out </button>
+	            </div> <!--account_panel -->
 		</script>
 		
 		<title>Twidder</title>

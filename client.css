@@ -43,7 +43,7 @@ form {
 label{
 	display: inline-block;  
 	text-align: left; 
-	margin-bottom: 0.5em;
+	margin-bottom: 0.3em;
 }
 
 input, select {
@@ -58,19 +58,19 @@ input, select {
    font-weight: bold;
 }
 
-ul {
-	width: 30%;
+.tabs {
+	position: relative;
+	width: 15rem;
 	margin-left: auto;
     margin-right: auto;
 	list-style-type: none; 
 }
 
 li {
-	display: block;
+	display: inline;
 }
 
 a {
-    float: left;
     width: 6em;
     color: black;
     padding: 0.2em 0.6em;
@@ -121,6 +121,9 @@ html, body {
    display: none;
 }
 
+#message_box {
+	resize: none;
+}
 
 
 
