@@ -14,29 +14,20 @@ signIn = function()
    displayView(current_view);
    window.location.href = "#home_panel";
    init_profile_functions();
-      setupProfile();
+   setupProfile();
 };
 
 setupProfile = function()
 {
    var temp_token = localStorage.getItem( "token" ); 
-   var response = serverstub.getUserDataByToken(token);
+   var response = serverstub.getUserDataByToken(temp_token);
 
-   if(response.success === true)
-   {
-      document.getElementById("profile_name").innerHTML = response.data.firstname;
-      document.getElementById("profile_family").innerHTML = response.familyname;
-      document.getElementById("profile_gender").innerHTML = response.gender;
-      document.getElementById("profile_country").innerHTML = response.country;
-      document.getElementById("profile_city").innerHTML = response.city;
-      document.getElementById("profile_email").innerHTML = response.email;
-   }
-
-   else
-   {
-      alert(response.message);
-   }
-
+   document.getElementById("profile_name").innerHTML = response.data.firstname;
+   document.getElementById("profile_family").innerHTML = response.data.familyname;
+   document.getElementById("profile_gender").innerHTML = response.data.gender;
+   document.getElementById("profile_country").innerHTML = response.data.country;
+   document.getElementById("profile_city").innerHTML = response.data.city;
+   document.getElementById("profile_email").innerHTML = response.data.email;
 };
 
 SignOut = function()
@@ -68,6 +59,7 @@ init_welcome_functions = function()
          else
          {
             localStorage.setItem( "token", response.data );
+            localStorage.setItem( "email", email );
             email1.setCustomValidity(""); //This line is probaly unnessery
             signIn();
          }
@@ -119,28 +111,25 @@ init_profile_functions = function()
 
    document.getElementById("change_psw").onsubmit = function()
    {
-      console.log("#1");
 
       var new_password = document.getElementById("password4").value;
       var ctr_new_password = document.getElementById("password5");
   
      if( new_password != ctr_new_password.value )
       {
-         console.log("#1.1");
          ctr_new_password.setCustomValidity("Your must write your new password twice!");
          return false;
       }
       else
       {
-         console.log("#1.2");
          ctr_new_password.setCustomValidity("");  
       }
-      console.log("#2");
+
       var old_password = document.getElementById("password3");
       var temp_token = localStorage.getItem( "token" ); 
 
       var response = serverstub.changePassword( temp_token, old_password.value, new_password );
-      console.log( response.success );
+
       if( response.success === false )
       {
          old_password.setCustomValidity( "Old password is incorrect" );
@@ -154,13 +143,94 @@ init_profile_functions = function()
       return false;
    };
 
-};
+
+    document.getElementById("post_button").onclick = function()
+    {
+        var token   = localStorage.getItem( "token" );
+       	var message = document.getElementById("message_post").value;
+        var email   = localStorage.getItem( "email" );
+
+        if( message !== "" )
+        {
+            serverstub.postMessage( token, message+'\n', email ); 
+            //serverstub.postMessage( token, '\n',  email );
+
+	    document.getElementById("message_post").value = "";
+            
+            document.getElementById("update_wall").click();    
+        }
+        
+    };
+
+
+  document.getElementById("update_wall").onclick = function()
+    {
+      var token = localStorage.getItem("token");
+      var response = serverstub.getUserMessagesByToken( token );
+      if( response.success === true )
+      {
+         document.getElementById("message_read").value = response.data[1].content + '\n'; //TODO ERROR RETURN OBJECTS
+      }
+  };
+
+   document.getElementById("lookup_profile").onsubmit = function() 
+   {
+      var email = document.getElementById("email4").value;      
+      var token = localStorage.getItem( "token" );
+
+      var response = serverstub.getUserDataByEmail( token, email ); 
+      if(response.success === true ) //email exist!
+      {
+         localStorage.setItem( "browse_email", email ); //stored for posting and reading
+ 
+         document.getElementById("update_wall_browse").click();    
+      }      
+  };
+
+
+   document.getElementById("post_button_browse").onclick = function()
+    {
+        var token   = localStorage.getItem( "token" );
+       	var message = document.getElementById("message_post_browse").value;
+        var email   = localStorage.getItem("browse_email");
+
+       if( message !== "" )
+        {
+            serverstub.postMessage( token, message+'\n', email ); 
+            //serverstub.postMessage( token, '\n',  email );
+
+	    document.getElementById("message_post_browse").value = "";
+            
+            document.getElementById("update_wall_browse").click(); 
+        } 
+    };
+
+
+
+   document.getElementById("update_wall_browse").onclick = function()
+    {
+      var token = localStorage.getItem("token");
+      var email = localStorage.getItem("browse_email");
+      var response = serverstub.getUserMessagesByToken( token, email );  //load by email
+      if( response.success === true )
+      {
+        var messages = "";
+        for (var i = 0; i < response.data.length ; i++) {
+            messages += response.data[i].writer+'\n';
+            messages += response.data[i].content;
+          }
+        document.getElementById("message_read_browse").value = messages; //TODO ERROR RETURN OBJECTS
+      }
+   };
+
+
+}; //PROFILE VIEW
 
 
 //WHEN ONE REFESH
 window.onload = function()
 {
-   if( localStorage.getItem( "token" ) === null || localStorage.getItem( "token" ) ===undefined )
+   if( localStorage.getItem( "token" ) === null || localStorage.getItem( "token" ) === undefined )
    {
       current_view = "welcomeview";
       displayView(current_view);
@@ -170,7 +240,9 @@ window.onload = function()
    {
       current_view = "profileview";
       displayView(current_view);
+      window.location.href = "#home_panel";
       init_profile_functions();
+      setupProfile();
    }
 };
 
@@ -202,10 +274,6 @@ validateSignUp = function()
 
 validateSignIn = function( psw ) 
 {
-   //http://stackoverflow.com/questions/11151157/jquery-same-function-for-multiple-ids
-
-   //var psw = document.getElementById("password1");
-
    if(psw.value.length < min_passw_length)
    {
       psw.setCustomValidity("Too short! It must be at least "+min_passw_length.toString()+" characters");
@@ -217,5 +285,6 @@ validateSignIn = function( psw )
      return true;
    }
 };
+
 
 
