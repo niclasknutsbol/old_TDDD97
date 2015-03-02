@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<html lang = "en">
+	<head>
+		<link rel="stylesheet" type="text/css" href="welcome.css">
+		<title>Welcome to Cluck!</title>
+		<meta charset = "UTF-8">
+ 	</head>
+
+<body>
+	<div class="wrapper">
+		<div class="elements">
+			<img class="logo" src="cluck.png" />
+			<form id = "sign-in">
+				<br>
+				<label for="email">Email: </label> <input type="text" name="email" id="email"> <br />
+					
+				<label for="password1">Password: </label> <input type="text" name="password" id="password1"> <br />
+				<input type="submit" value="LogIn">
+			</form>
+
+			<form id = "sign-up">
+				<p id="desc">Sign up here</p>
+
+				<label for="firstname">First name: </label>  <input type="text" name="firstname" id="firstname"/> <br />
+
+				<label for="familyname">Family name: </label> <input type="text" name="familyname" id ="familyname"/> <br />
+
+				<label for="gend">Gender: </label> 
+				<select id="gend" name="gender" form="sign-up">
+					<option value="female">Female</option>
+					<option value="male">Male</option>
+				</select>
+				<br />
+				<label for="city">City: </label> <input type="text" name="city" id="city"> <br />
+				<label for="country">Country: </label>  <input type="text" name="country" id="country"> <br />
+				<label for="email">Email: </label> <input type="text" name="email" id="email"> <br />
+				<label for="password2">Password: </label> <input type="text" name="password" id="password2"> <br />
+				<label for="repeat_psw">Repeat PSW: </label> <input type="text" name="repeat_psw" id="repeat_psw"> <br />
+				<input type="submit" value="SignUp"> <br />
+			</form>
+		</div>
+	</div>
+</body>
+</html>
